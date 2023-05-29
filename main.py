@@ -26,32 +26,6 @@ def Main():
     print(image_Left_URL)
     print(image_Right_URL)
 
-    image_Left = plt.imread(image_Left_URL)
-    image_Right = plt.imread(image_Right_URL)
-
-    # Convert the image to grayscale
-    image_Left_GS = cv2.cvtColor(image_Left, cv2.COLOR_BGR2GRAY)
-
-    # Convert the image to grayscale
-    image_Right_GS = cv2.cvtColor(image_Right, cv2.COLOR_BGR2GRAY)
-
-    # Create a figure and two subplots
-    fig, (ax1, ax2) = plt.subplots(1, 2)
-
-    # Display the first image with subtitle
-    ax1.imshow(image_Left)
-    ax1.set_title("image Left")
-
-    # Display the second image with subtitle
-    ax2.imshow(image_Right)
-    ax2.set_title("image Right")
-
-    # Adjust the spacing between subplots
-    plt.tight_layout()
-
-    # Show the plot
-    # TODO
-    plt.show()
     # Start the timer
     start_time = time.time()
 

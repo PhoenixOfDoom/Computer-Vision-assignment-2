@@ -30,7 +30,7 @@ def Calculate_Disparty_Map(LEFT_IMG, RIGHT_IMG,max_disparity=134):
     disparity_map = np.argmin(Volume_Cost, axis=2)
 
     Left_Disparity = disparity_map
-    Right_Disparity = np.argmin(Volume_Cost.transpose(1, 0, 2), axis=2)
+    Right_Disparity = disparity_map
 
 
     # cv2.imshow("LEFT Transformed Image", LEFT_IMG_Census)
@@ -62,6 +62,7 @@ def Calculate_Disparty_Map(LEFT_IMG, RIGHT_IMG,max_disparity=134):
 # ==================================================================================================================
 def DO_Assignment():
     Matrix = Tester.Extract_K("data/set_1/K.txt")
+    preview_imgs("data/set_1/im_left.jpg","data/set_1/im_right.jpg")
     # Left_IMG = cv2.imread("data/set_1/im_left.jpg")
     # Right_IMG = cv2.imread("data/set_1/im_right.jpg")
     max_disparity = Tester.Extract_MaxDisp("data/set_1/max_disp.txt")
@@ -71,6 +72,40 @@ def DO_Assignment():
 
     Left_Disparity,Right_Disparity = Calculate_Disparty_Map(Left_IMG, RIGHT_IMG)
 
+    preview_imgs_dispairty(Left_IMG, RIGHT_IMG, Left_Disparity, Right_Disparity)
+
+    return
+
+def preview_imgs(IMG_LEFT_URL,IMG_RIGHT_URL):
+    image_Left = plt.imread(IMG_LEFT_URL)
+    image_Right = plt.imread(IMG_RIGHT_URL)
+
+    # Convert the image to grayscale
+    image_Left_GS = cv2.cvtColor(image_Left, cv2.COLOR_BGR2GRAY)
+
+    # Convert the image to grayscale
+    image_Right_GS = cv2.cvtColor(image_Right, cv2.COLOR_BGR2GRAY)
+
+    # Create a figure and two subplots
+    fig, (ax1, ax2) = plt.subplots(1, 2)
+
+    # Display the first image with subtitle
+    ax1.imshow(image_Left)
+    ax1.set_title("image Left")
+
+    # Display the second image with subtitle
+    ax2.imshow(image_Right)
+    ax2.set_title("image Right")
+
+    # Adjust the spacing between subplots
+    plt.tight_layout()
+
+    # Show the plot
+    plt.show()
+
+    return
+
+def preview_imgs_dispairty(Left_IMG,RIGHT_IMG,Left_Disparity,Right_Disparity):
     # Create subplots for left image, left disparity map, right image, and right disparity map
     fig, axs = plt.subplots(2, 2, figsize=(12, 6))
 
@@ -91,23 +126,4 @@ def DO_Assignment():
 
     # Show the plot
     plt.show()
-
     return
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# ==================================================================================================================
-# CHAT-GPT
-
-
